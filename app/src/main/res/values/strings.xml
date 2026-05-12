@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Corebound Helper</string>
+    <string-array name="maps">
+        <item>The Lost Scrapyard</item>
+        <item>Crystal Quarry</item>
+        <item>Beacon City</item>
+        <item>Desolate Drains</item>
+        <item>Icy Hollow</item>
+        <item>Kinetic Workshop</item>
+    </string-array>
+</resources>
