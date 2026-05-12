@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         //Spinner selection handler with buttons
         val linearLayoutScrollView = findViewById<LinearLayout>(R.id.linearLayoutScrollView)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>, //Spinner
                 view: View, //selected item view
@@ -38,24 +38,36 @@ class MainActivity : AppCompatActivity() {
                 id: Long, //row id of selected item
             ) {
                 val selectedFromSpinner = parent.getItemAtPosition(position).toString()
-                linearLayoutScrollView.removeAllViews() //this is important, removes previous views
 
-                val descriptionsLostScrapyard = descriptionsLostScrapyard
-                for (i in 0..5) { //TODO(change loop logic after adding more map)
-                    if (descriptionsLostScrapyard[i].map == selectedFromSpinner) {
+                linearLayoutScrollView.removeAllViews()
+                //this is important, removes previous views
+
+                //dynamic selection of maps from spinner
+                val descriptionsSelectedMap: List<Description> =
+                when(selectedFromSpinner) {
+                    "The Lost Scrapyard" -> descriptionsLostScrapyard
+                    "Crystal Quarry" -> descriptionsCrystalQuarry
+                    "Beacon City" -> descriptionsBeaconCity
+                    "Desolate Drains" -> descriptionsDesolateDrains
+                    "Icy Hollow" -> descriptionsIcyHollow
+                    "Kinetic Workshop" -> descriptionsKineticWorkshop
+                    else -> descriptionsLostScrapyard
+                }
+
+                for (enemy in descriptionsSelectedMap) {
                     val button = Button(this@MainActivity)
-                    button.text = descriptionsLostScrapyard[i].name
-                    button.id = descriptionsLostScrapyard[i].id
-                        val buttonParams = LinearLayout.LayoutParams (
+                    button.text = enemy.name
+                    button.id = enemy.id
+                    val buttonParams = LinearLayout.LayoutParams (
                         LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT,)
-                        buttonParams.setMargins(16, 8, 16, 8)
-                        button.layoutParams = buttonParams
-                        linearLayoutScrollView.addView(button)
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        )
+                    buttonParams.setMargins(16, 8, 16, 8)
+                    button.layoutParams = buttonParams
+                    linearLayoutScrollView.addView(button)
 
-                        button.setOnClickListener {///here
+                    button.setOnClickListener {///here
                         }
-                    }
                 }
                 /*val button = Button(this@MainActivity)
                 button.text = descriptionsLostScrapyard[1].name //selectedFromSpinner
