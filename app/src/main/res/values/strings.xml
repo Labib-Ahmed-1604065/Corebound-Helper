@@ -8,4 +8,6 @@
         <item>Icy Hollow</item>
         <item>Kinetic Workshop</item>
     </string-array>
+    <string name="image_content_description_placeholder">Box</string>
+    <string name="hardcoded_string_placeholder">Box</string>
 </resources>

@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Spinner
+import android.content.Intent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -66,7 +67,14 @@ class MainActivity : AppCompatActivity() {
                     button.layoutParams = buttonParams
                     linearLayoutScrollView.addView(button)
 
-                    button.setOnClickListener {///here
+                    button.setOnClickListener {
+                        val descriptionIntent = Intent(this@MainActivity, DescriptionActivity::class.java)
+                        descriptionIntent.putExtra("enemyID", enemy.id)
+                        descriptionIntent.putExtra("enemyName", enemy.name)
+                        descriptionIntent.putExtra("enemyDescription", enemy.description)
+                        descriptionIntent.putExtra("enemyHealth", enemy.attributeHealth)
+                        descriptionIntent.putExtra("enemyDamage", enemy.attributeDamage)
+                        startActivity(descriptionIntent)
                         }
                 }
                 /*val button = Button(this@MainActivity)
