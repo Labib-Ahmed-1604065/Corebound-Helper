@@ -23,70 +23,111 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        //Spinner for Dropdown Box containing map names
-        val spinner = findViewById<Spinner>(R.id.spinner)
-        val adapter = ArrayAdapter.createFromResource(this, R.array.maps, android.R.layout.simple_spinner_dropdown_item)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter=adapter
 
-        //Spinner selection handler with buttons
-        val linearLayoutScrollView = findViewById<LinearLayout>(R.id.linearLayoutScrollView)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        //Spinner for difficulty boosters that will change maps
+        val difficultySpinner = findViewById<Spinner>(R.id.difficultySpinner)
+        val difficultyAdapter = ArrayAdapter.createFromResource(this, R.array.boosts, android.R.layout.simple_spinner_dropdown_item)
+        difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        difficultySpinner.adapter = difficultyAdapter
+
+        //Difficulty booster selection handler
+        difficultySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>, //Spinner
-                view: View, //selected item view
-                position: Int, //index of selected item
-                id: Long, //row id of selected item
+                parent: AdapterView<*>, //Difficulty Spinner
+                view: View, //selected item by user view
+                position: Int, //index of the selected item
+                id: Long, //row id of the selected item
             ) {
-                val selectedFromSpinner = parent.getItemAtPosition(position).toString()
-
-                linearLayoutScrollView.removeAllViews()
-                //this is important, removes previous views
-
-                //dynamic selection of maps from spinner
-                val descriptionsSelectedMap: List<Description> =
-                when(selectedFromSpinner) {
-                    "The Lost Scrapyard" -> descriptionsLostScrapyard
-                    "Crystal Quarry" -> descriptionsCrystalQuarry
-                    "Beacon City" -> descriptionsBeaconCity
-                    "Desolate Drains" -> descriptionsDesolateDrains
-                    "Icy Hollow" -> descriptionsIcyHollow
-                    "Kinetic Workshop" -> descriptionsKineticWorkshop
-                    else -> descriptionsLostScrapyard
+                //takes difficulty spinner selection and gives maps written in strings.xml
+                val selectedFromDifficultySpinner = parent.getItemAtPosition(position).toString()
+                val mapsToBeShown = when(selectedFromDifficultySpinner) {
+                    "Scrap" -> R.array.scrap
+                    "Tarnished" -> R.array.tarnished
+                    "Pure" -> R.array.pure
+                    "Toxic" -> R.array.toxic
+                    "Frozen" -> R.array.frozen
+                    "Geared" -> R.array.geared
+                    else -> R.array.scrap
                 }
 
-                for (enemy in descriptionsSelectedMap) {
-                    val button = Button(this@MainActivity)
-                    button.text = enemy.name
-                    button.id = enemy.id
-                    val buttonParams = LinearLayout.LayoutParams (
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        )
-                    buttonParams.setMargins(16, 8, 16, 8)
-                    button.layoutParams = buttonParams
-                    linearLayoutScrollView.addView(button)
+                //Spinner for Dropdown Box containing map names
+                val mapSpinner = findViewById<Spinner>(R.id.mapSpinner)
+                val mapAdapter = ArrayAdapter.createFromResource(this@MainActivity, mapsToBeShown, android.R.layout.simple_spinner_dropdown_item)
+                mapAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                mapSpinner.adapter=mapAdapter
 
-                    button.setOnClickListener {
-                        val descriptionIntent = Intent(this@MainActivity, DescriptionActivity::class.java)
-                        descriptionIntent.putExtra("enemyID", enemy.id)
-                        descriptionIntent.putExtra("enemyName", enemy.name)
-                        descriptionIntent.putExtra("enemyDescription", enemy.description)
-                        descriptionIntent.putExtra("enemyHealth", enemy.attributeHealth)
-                        descriptionIntent.putExtra("enemyDamage", enemy.attributeDamage)
-                        startActivity(descriptionIntent)
+                //Spinner selection handler with buttons
+                val linearLayoutScrollView = findViewById<LinearLayout>(R.id.linearLayoutScrollView)
+                mapSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>, //Spinner
+                        view: View, //selected item view
+                        position: Int, //index of the selected item
+                        id: Long, //row id of the selected item
+                    ) {
+                        val selectedFromMapSpinner = parent.getItemAtPosition(position).toString()
+
+                        //this is important, removes previous views
+                        linearLayoutScrollView.removeAllViews()
+
+                        //dynamic selection of maps from mapSpinner
+                        val descriptionsSelectedMap: List<Description> =
+                        when(selectedFromDifficultySpinner to selectedFromMapSpinner) {
+                            "Scrap" to "The Lost Scrapyard" -> descriptions_DifficultyScrap_MapTheLostScrapyard
+                            "Tarnished" to "The Lost Scrapyard" -> descriptions_DifficultyTarnished_MapTheLostScrapyard
+                            "Tarnished" to "Crystal Quarry" -> descriptions_DifficultyTarnished_MapCrystalQuarry
+                            "Pure" to "The Lost Scrapyard" -> descriptions_DifficultyPure_MapTheLostScrapyard
+                            "Pure" to "Crystal Quarry" -> descriptions_DifficultyPure_MapCrystalQuarry
+                            "Pure" to "Beacon City" -> descriptions_DifficultyPure_MapBeaconCity
+                            "Toxic" to "The Lost Scrapyard" -> descriptions_DifficultyToxic_MapTheLostScrapyard
+                            "Toxic" to "Crystal Quarry" -> descriptions_DifficultyToxic_MapCrystalQuarry
+                            "Toxic" to "Beacon City" -> descriptions_DifficultyToxic_MapBeaconCity
+                            "Toxic" to "Desolate Drains" -> descriptions_DifficultyToxic_MapDesolateDrains
+                            "Frozen" to "The Lost Scrapyard" -> descriptions_DifficultyFrozen_MapTheLostScrapyard
+                            "Frozen" to "Crystal Quarry" -> descriptions_DifficultyFrozen_MapCrystalQuarry
+                            "Frozen" to "Beacon City" -> descriptions_DifficultyFrozen_MapBeaconCity
+                            "Frozen" to "Desolate Drains" -> descriptions_DifficultyFrozen_MapDesolateDrains
+                            "Frozen" to "Icy Hollow" -> descriptions_DifficultyFrozen_MapIcyHollow
+                            "Geared" to "The Lost Scrapyard" -> descriptions_DifficultyGeared_MapTheLostScrapyard
+                            "Geared" to "Crystal Quarry" -> descriptions_DifficultyGeared_MapCrystalQuarry
+                            "Geared" to "Beacon City" -> descriptions_DifficultyGeared_MapBeaconCity
+                            "Geared" to "Desolate Drains" -> descriptions_DifficultyGeared_MapDesolateDrains
+                            "Geared" to "Icy Hollow" -> descriptions_DifficultyGeared_MapIcyHollow
+                            "Geared" to "Kinetic Workshop" -> descriptions_DifficultyGeared_MapKineticWorkshop
+                            else -> descriptions_DifficultyScrap_MapTheLostScrapyard
                         }
+
+                        for (enemy in descriptionsSelectedMap) {
+                            val button = Button(this@MainActivity)
+                            button.text = enemy.name
+                            button.id = enemy.id
+                            val buttonParams = LinearLayout.LayoutParams (
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                )
+                            buttonParams.setMargins(16, 8, 16, 8)
+                            button.layoutParams = buttonParams
+                            linearLayoutScrollView.addView(button)
+
+                            button.setOnClickListener {
+                                val descriptionIntent = Intent(this@MainActivity, DescriptionActivity::class.java)
+                                descriptionIntent.putExtra("enemyID", enemy.id)
+                                descriptionIntent.putExtra("enemyName", enemy.name)
+                                descriptionIntent.putExtra("enemyDescription", enemy.description)
+                                descriptionIntent.putExtra("enemyHealth", enemy.attributeHealth)
+                                descriptionIntent.putExtra("enemyDamage", enemy.attributeDamage)
+                                startActivity(descriptionIntent)
+                                }
+                        }
+                        /*val button = Button(this@MainActivity)
+                        button.text = descriptionsLostScrapyard[1].name //selectedFromSpinner
+                        linearlayout1.addView(button)*/
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>) {}
                 }
-                /*val button = Button(this@MainActivity)
-                button.text = descriptionsLostScrapyard[1].name //selectedFromSpinner
-                linearlayout1.addView(button)*/
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
-        //Dynamic buttons from description
-
-        //to do: add dropdown for difficulty upgrades
     }
 }

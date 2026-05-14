@@ -26,8 +26,25 @@
             app:title="@string/app_name"
             app:titleCentered="true" />
 
+        <TextView
+            android:id="@+id/difficultTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/difficulty_selection" />
+
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/difficultySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mapTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/map_selection" />
+
+        <Spinner
+            android:id="@+id/mapSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout_height="wrap_content" />

@@ -1,12 +1,81 @@
 <resources>
     <string name="app_name">Corebound Helper</string>
-    <string-array name="maps">
+    <string name="difficulty_selection">Select Boost Type</string>
+    <string name="map_selection">Select Map</string>
+    <string-array name="boosts">
+        <item>Scrap</item>
+        <item>Tarnished</item>
+        <item>Pure</item>
+        <item>Toxic</item>
+        <item>Frozen</item>
+        <item>Geared</item>
+    </string-array>
+    <string-array name="scrap">
+        <item>The Lost Scrapyard</item>
+    </string-array>
+    <string-array name="tarnished">
+        <item>The Lost Scrapyard</item>
+        <item>Crystal Quarry</item>
+    </string-array>
+    <string-array name="pure">
+        <item>The Lost Scrapyard</item>
+        <item>Crystal Quarry</item>
+        <item>Beacon City</item>
+    </string-array>
+    <string-array name="toxic">
+        <item>The Lost Scrapyard</item>
+        <item>Crystal Quarry</item>
+        <item>Beacon City</item>
+        <item>Desolate Drains</item>
+    </string-array>
+    <string-array name="frozen">
+        <item>The Lost Scrapyard</item>
+        <item>Crystal Quarry</item>
+        <item>Beacon City</item>
+        <item>Desolate Drains</item>
+        <item>Icy Hollow</item>
+    </string-array>
+    <string-array name="geared">
         <item>The Lost Scrapyard</item>
         <item>Crystal Quarry</item>
         <item>Beacon City</item>
         <item>Desolate Drains</item>
         <item>Icy Hollow</item>
         <item>Kinetic Workshop</item>
+    </string-array>
+    <string-array name="enemyName">
+        <item>Box</item>
+        <item>Springling</item>
+        <item>Roller</item>
+        <item>Scaplash</item>
+        <item>Dreadnought</item>
+        <item>Spectrum</item>
+        <item>Bubblemound</item>
+        <item>Drill</item>
+        <item>Wiremaw</item>
+        <item>Voltstriker</item>
+        <item>Lurkstrider</item>
+        <item>Voltheart</item>
+        <item>Flareling</item>
+        <item>Rasp</item>
+        <item>Droneweaver</item>
+        <item>Purveyor</item>
+        <item>Orbital</item>
+        <item>Dreadling</item>
+        <item>Sentry</item>
+        <item>Thornhead</item>
+        <item>Obstron</item>
+        <item>Forgeheart</item>
+        <item>Thumper</item>
+        <item>Springking</item>
+        <item>Tetherhawk</item>
+        <item>Tunneler</item>
+        <item>Annihilator</item>
+        <item>Reaver</item>
+        <item>Shatterclaw</item>
+        <item>Cyclovane</item>
+        <item>Barrelspire</item>
+        <item>Stridelord</item>
     </string-array>
     <string name="image_content_description_placeholder">Box</string>
     <string name="hardcoded_string_placeholder">Box</string>

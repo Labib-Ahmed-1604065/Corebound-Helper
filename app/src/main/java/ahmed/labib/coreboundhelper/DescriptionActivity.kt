@@ -52,5 +52,5 @@ class DescriptionActivity : AppCompatActivity() {
         main.addView(infoConstraintLayout)
         main.addView(detailsTextView)
     }
-    //TODO(another spinner to select difficulty)
+    //TODO(another mapSpinner to select difficulty)
 }
